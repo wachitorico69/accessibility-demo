@@ -4,9 +4,9 @@
 
 <div class="barra">
 @if (barra) {
-     <button>inicio</button>
-     <button>pausa</button>
-     <button>play</button>
+     <button (click)="addMessage()">inicio</button>
+     <button (click)="pausaResumir()">pausa/play</button>
+     <button (click)="cancelar()">cancelar</button>
      <button (click)="actContraste()">contraste</button>
      <button (click)="changeSize()">texto</button>
      <button (click)="changeFont()">fuente</button>
@@ -15,10 +15,10 @@
 }
 </div>
 
-<div [ngStyle] ="{'font-size.px': fontSize, 'font-family': fontFam, 'color': color, 'background-color': bcolor, 'font-weight': weight}">
-<p>home works!</p>
+<div #textContainer [ngStyle] ="{'font-size.px': fontSize, 'font-family': fontFam, 'color': color, 'background-color': bcolor, 'font-weight': weight}">
+<p #readable>La capacidad que tiene From Software para crear auténticos juegazos en relativamente poco tiempo es algo digno de admiración. </p>
 
-<h1>Dario</h1>
-<h2>Moreno</h2>
+<h1 #readable>Dario</h1>
+<h2 #readable>Moreno</h2>
 </div>
 

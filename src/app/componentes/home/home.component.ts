@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +17,61 @@ export class HomeComponent {
 
   doSom() {
     this.barra = !this.barra;
+    this.fontSize = 20;
+    this.fontFam = "Arial";
+    this.color = "#2ea55a";
+    this.bcolor = "#ff3131";
+    this.weight = "normal";
+    this.cancelar();
+  }
+
+  @ViewChildren('readable') readableElements!: QueryList<ElementRef>;
+  currentElement: HTMLElement | null = null;
+
+  addMessage() {
+    const elements = this.readableElements.toArray();
+
+    const readNext = (index: number) => {
+      if (index >= elements.length) return;
+
+      const el = elements[index].nativeElement;
+      const text = el.innerText;
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      //resaltar
+      utterance.onstart = () => {
+        el.style.backgroundColor = 'yellow';
+        this.currentElement = el; // guardar referencia
+      };
+
+      //quitar resaltado
+      utterance.onend = () => {
+        el.style.backgroundColor = 'transparent';
+        this.currentElement = null;
+        readNext(index + 1);
+      };
+
+      speechSynthesis.speak(utterance);
+    };
+
+    readNext(0); // Comenzar desde el primer elemento
+  }
+
+  pausaResumir() {
+    if (speechSynthesis.paused)
+      speechSynthesis.resume();
+    else
+      speechSynthesis.pause();
+  }
+
+  cancelar() {
+    speechSynthesis.cancel();
+
+    if (this.currentElement) {
+      this.currentElement.style.backgroundColor = 'transparent';
+      this.currentElement = null;
+    }
   }
 
   actContraste() {
