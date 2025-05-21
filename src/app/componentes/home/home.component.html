@@ -7,7 +7,7 @@
      <button>inicio</button>
      <button>pausa</button>
      <button>play</button>
-     <button>contraste</button>
+     <button (click)="actContraste()">contraste</button>
      <button (click)="changeSize()">texto</button>
      <button (click)="changeFont()">fuente</button>
 } @else {
@@ -15,7 +15,7 @@
 }
 </div>
 
-<div [ngStyle] ="{'font-size.px': fontSize, 'font-family': fontFam}">
+<div [ngStyle] ="{'font-size.px': fontSize, 'font-family': fontFam, 'color': color, 'background-color': bcolor, 'font-weight': weight}">
 <p>home works!</p>
 
 <h1>Dario</h1>
