@@ -1,0 +1,24 @@
+<div>
+<button (click)="doSom()" class="acc"><img src="acc.png"></button>
+</div>
+
+<div class="barra">
+@if (barra) {
+     <button>inicio</button>
+     <button>pausa</button>
+     <button>play</button>
+     <button>contraste</button>
+     <button (click)="changeSize()">texto</button>
+     <button (click)="changeFont()">fuente</button>
+} @else {
+    
+}
+</div>
+
+<div [ngStyle] ="{'font-size.px': fontSize, 'font-family': fontFam}">
+<p>home works!</p>
+
+<h1>Dario</h1>
+<h2>Moreno</h2>
+</div>
+
